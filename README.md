@@ -15,15 +15,15 @@ The example simulation features a **4WS4WD** (4-Wheel Steering, 4-Wheel Driving)
 
 ## Background
 
-### Godot 4.3
+### Godot 4.3 and ROS2
 
 Godot 4.3 is the latest iteration of the Godot game engine, known for its open-source nature, modular architecture, and robust community support. Compared to other popular game engines like Unity and Unreal, Godot stands out due to its lightweight footprint, ease of use, and complete access to its source code. These features make it particularly suitable for integration with other open-source projects, such as ROS2.
 
 Godot's architecture is highly modular, allowing developers to extend or modify its functionality through modules. In the context of ROS2, this modularity enables tight integration with ROS2's middleware, making it possible to run complex simulations and control systems entirely within the Godot environment.
 
-### 4WS4WD Mobile Robot Setup
+### Create a complete Robotics Application with controls and sensors in a Simulated Environment using Godot 4
 
-The 4WS4WD (4-Wheel Steering, 4-Wheel Driving) configuration is an advanced mobile robot setup where each wheel is independently steered and driven, commonly referred to as a **Swerve Drive**. This setup allows for highly maneuverable robots capable of moving in any direction, regardless of their orientation, making them ideal for complex navigation tasks.
+The example Robotics Application included in this repository contains a 4WS4WD (4-Wheel Steering, 4-Wheel Driving) configuration, which is an advanced mobile robot setup where each wheel is independently steered and driven, commonly referred to as a **Swerve Drive**. This setup allows for highly maneuverable robots capable of moving in any direction, regardless of their orientation, making them ideal for complex navigation tasks.
 
 Swerve Drive robots are often used in competitive robotics, such as the FIRST Robotics Competition (FRC). The ability to control each wheel's steering angle and speed independently provides unparalleled maneuverability, allowing the robot to rotate on the spot, move sideways, or follow complex paths with precision.
 
@@ -33,13 +33,16 @@ For more information on the 4WS4WD Swerve Drive configuration, consider reviewin
 - [Swerve Drive Kinematics](https://first.wpi.edu/wpilib/allwpilib/docs/release/java/src-html/edu/wpi/first/math/kinematics/SwerveDriveKinematics.html)
 - [Swerve Drive Visualization](https://github.com/xiaoxiae/SwerveDriveVisualisation)
 
+## The Blender-Godot-ROS2 pipeline
+What we want for Robotics Simulation is an Open Source true reliable **Game Engine** closely integrated with Blender and ROS2. Use blender for what it's good at - Geometry and Scene Setup. Godot by far has the best integration with Blender.
+
+<img src="https://github.com/user-attachments/assets/4f24f085-0de7-438f-8500-748f73457ac3" width="800" style="float:left; margin-right:10px;">
+
 ### Jolt Physics Engine
 
 While Godot 4 comes with a built-in physics engine, it has been noted that this default engine may not meet the high precision and performance requirements needed for advanced robotics simulations. To address this, this project uses the **Jolt Physics Engine**, a native extension for Godot that provides a more robust and accurate physics simulation environment.
 
-Jolt is known for its high performance and stability, making it well-suited for simulations involving complex physical interactions. With Jolt, Godot 4 handles 3D physics simulations "like a charm," offering a much-needed improvement over the default engine.
-
-For more details on the Jolt Physics Engine and its integration with Godot, refer to the following resources:
+Jolt is known for its high performance and stability, making it well-suited for simulations involving complex physical interactions. For more details on the Jolt Physics Engine and its integration with Godot, refer to the following resources:
 
 - [Jolt Physics Engine for Godot](https://github.com/godot-jolt/godot-jolt)
 - [Discussion on Godot 4's Default Physics Engine](https://www.reddit.com/r/godot/comments/16p90a1/godot_4_default_physics_engine_is_a_complete_mess/)
@@ -60,12 +63,26 @@ For more details on the Jolt Physics Engine and its integration with Godot, refe
 - Jolt Physics Engine (for Godot)
 - rqt_image_view ROS2 add-on
 
-### Building the Godot Module
+### Building ROS2 from source
+You might be able to skip this step, however I had to build ROS2, because of inconsistent libraries on my computer. So my advice would be to build ROS2.
+Find the instructions for installing ROS2 Humble [here](https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html).
 
-1. Clone the repository:
+### Git Clone & Build additional ROS2 packages
+
+1. 
+   ```bash
+   cd ~/ros2_humble/src/ros-perception
+   git clone https://github.com/ros-perception/vision_opencv.git
+   cd ../ros-visualization
+   git clone https://github.com/ros-visualization/rqt_image_view.git
+   cd ../..
+   colcon build --symlink-install
+
+### Clone THIS repository
+
+1. Clone repository:
    ```bash
    git clone https://github.com/nordstream3/Godot-4-ROS2-integration.git
-
 2. Unzip compressed .blend file:
    ```bash
    cd /path/to/Godot-4-ROS2-integration/src/Godot_4WS4WD_simulation_game
@@ -102,4 +119,3 @@ For more details on the Jolt Physics Engine and its integration with Godot, refe
 ## License
 This project is licensed under the MIT License.
 
-![blender-godot4-ROS2](https://github.com/user-attachments/assets/4f24f085-0de7-438f-8500-748f73457ac3)
