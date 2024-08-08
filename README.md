@@ -8,7 +8,7 @@ This project aims to fuse the powerful open-source game engine Godot 4 with ROS2
 
 ## This repository contains:
 
-- A ROS2 component developed as a Godot module, built with the Godot 4 source code. Godot uses SCons build system.
+- A ROS2 component developed as a Godot module, built with the Godot 4 source code.
 - An example simulation of a mobile robot, created as a Godot 4.3 game.
 
 The example simulation features a **4WS4WD** (4-Wheel Steering, 4-Wheel Driving) setup, where each wheel is configured as a **Swerve Drive**. The robot can be controlled externally via ROS2 and includes a simulated Depth Camera that interfaces with ROS2 for image data.
