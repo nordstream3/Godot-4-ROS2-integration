@@ -65,7 +65,7 @@ Jolt is known for its high performance and stability, making it well-suited for 
 
 ### Building ROS2 from source
 You might be able to skip this step, however I had to build ROS2, because of inconsistent libraries on my computer. So my advice would be to build ROS2.
-Find the instructions for installing ROS2 Humble [here](https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html).
+Find the instructions for building ROS2 Humble from source [here](https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html).
 
 ### Git Clone & Build additional ROS2 packages
 
