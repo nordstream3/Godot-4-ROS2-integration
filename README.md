@@ -83,16 +83,22 @@ Find the instructions for installing ROS2 Humble [here](https://docs.ros.org/en/
 1. Clone repository:
    ```bash
    git clone https://github.com/nordstream3/Godot-4-ROS2-integration.git
-2. Unzip compressed .blend file:
+
+2. Edit the "SCsub" file in /path/to/Godot-4-ROS2-integration/src/godot_custom_modules/godot_ros to match your ROS2 distribution and install directory. By default these values are:
+   ```bash
+   ros_distro = "humble"
+   ros_dir = "~/ros2_humble/install"
+   
+3. Unzip compressed .blend file:
    ```bash
    cd /path/to/Godot-4-ROS2-integration/src/Godot_4WS4WD_simulation_game
    unzip warehouse.blend.zip
 
-3. Build Godot 4.x with ROS2-module:
+4. Build Godot 4.x with ROS2-module:
    ```bash
    cd /path/to/godot-source-code
    scons -j8 verbose=yes disable_exceptions=false SHOWBUILD=1 custom_modules=/path/to/Godot-4-ROS2-integration/src/godot_custom_modules platform=linuxbsd
-4. Build Jolt Physics Engine add-on for Godot 4 ([details are here](https://github.com/godot-jolt/godot-jolt)):
+5. Build Jolt Physics Engine add-on for Godot 4 ([details are here](https://github.com/godot-jolt/godot-jolt)):
    ```bash
    git clone https://github.com/godot-jolt/godot-jolt.git
    cd godot-jolt
