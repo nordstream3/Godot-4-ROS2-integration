@@ -60,13 +60,18 @@ For more details on the Jolt Physics Engine and its integration with Godot, refe
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/godot-ros2-integration.git
-   cd godot-ros2-integration
+   git clone https://github.com/nordstream3/Godot-4-ROS2-integration.git
 
-2. Build the Godot module with scons:
+2. Unzip compressed .blend file:
    ```bash
-   scons platform=linuxbsd
-3. Integrate the built module with your Godot 4.3 source code.
+   cd /<some-path>/Godot-4-ROS2-integration/src/Godot_4WS4WD_simulation_game
+   unzip warehouse.blend.zip
+
+3. Build Godot 4.x with ROS2-module:
+   ```bash
+   cd /<godot-source-code-path>
+   scons -j8 verbose=yes disable_exceptions=false SHOWBUILD=1 custom_modules=/<some-path>/Godot-4-ROS2-integration/src/godot_custom_modules platform=linuxbsd
+4. Integrate the built module with your Godot 4.3 source code.
 
 ## Usage
 ### Running the Simulation
