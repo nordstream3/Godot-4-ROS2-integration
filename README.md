@@ -11,7 +11,7 @@ This project aims to fuse the powerful open-source game engine Godot 4 with ROS2
 - A C++ ROS2 component build and linked with the C++ Godot 4 source code.
 - An example simulation of a mobile robot, created as a Godot 4.3 game.
 
-The example simulation features a **4WS4WD** (4-Wheel Steering, 4-Wheel Driving) setup, where each wheel is configured as a **Swerve Drive**. The robot can be controlled externally via ROS2 and includes a simulated Depth Camera that interfaces with ROS2 for image data.
+The example simulation features a **4WS4WD** (4-Wheel Steering, 4-Wheel Driving) setup, where each wheel is configured as a **Swerve Drive**. The robot can be controlled externally through its ROS2 interface. Similarly, it includes a simulated Depth Camera which streams images through its ROS2 node publisher.
 
 ## Background
 
