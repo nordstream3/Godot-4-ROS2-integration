@@ -53,8 +53,8 @@ For more details on the Jolt Physics Engine and its integration with Godot, refe
 
 - Godot 4.3
 - ROS2 (Humble Hawksbill or later)
-- SCons build system
 - Jolt Physics Engine (for Godot)
+- rqt_image_view ROS2 add-on
 
 ### Building the Godot Module
 
