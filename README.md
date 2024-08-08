@@ -82,19 +82,18 @@ For more details on the Jolt Physics Engine and its integration with Godot, refe
    cmake --install build/linux-gcc-x64 --config EditorDistribution --prefix /path/to/Godot-4-ROS2-integration/src/Godot_4WS4WD_simulation_game
    
 ## Usage
-### Running the Simulation
-1. Open the example project in Godot 4.3.
-2. Ensure your ROS2 environment is set up and running.
-3. Run the Godot simulation.
-4. Use ROS2 to control the robot and receive Depth Camera data (e.g., using rqt_image_view to view images).
-
-## Examples
-### Example Simulation: 4WS4WD Mobile Robot
-The repository includes an example simulation of a mobile robot with the following capabilities:
-
-* 4WS4WD (Swerve Drive): Independently steered and driven wheels, allowing for complex, omnidirectional movement.
-* ROS2 Control: Interface with the robot using ROS2 topics and services.
-* Simulated Depth Camera: Provides image data to ROS2 for processing.
+### Running ROS2 integrated 4WS4WD Mobile Robot Simulation (Game)
+1. Source ROS2:
+   ```bash
+   source /path/to/ros2_humble/install/local_setup.bash
+2. Run Godot in verbose/debug_info mode:
+   ```bash
+   ./godot.linuxbsd.editor.x86_64 -v -d
+3. Open Godot_4WS4WD_simulation_game and hit the play button to run the game.
+4. In a new terminal, subscribe to ROS2 image nodes using "rqt_image_view":
+   ```bash
+   source /path/to/ros2_humble/install/local_setup.bash
+   ros2 run rqt_image_view rqt_image_view
 
 ## License
 This project is licensed under the MIT License.
