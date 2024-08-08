@@ -64,15 +64,23 @@ For more details on the Jolt Physics Engine and its integration with Godot, refe
 
 2. Unzip compressed .blend file:
    ```bash
-   cd /<some-path>/Godot-4-ROS2-integration/src/Godot_4WS4WD_simulation_game
+   cd /path/to/Godot-4-ROS2-integration/src/Godot_4WS4WD_simulation_game
    unzip warehouse.blend.zip
 
 3. Build Godot 4.x with ROS2-module:
    ```bash
-   cd /<godot-source-code-path>
-   scons -j8 verbose=yes disable_exceptions=false SHOWBUILD=1 custom_modules=/<some-path>/Godot-4-ROS2-integration/src/godot_custom_modules platform=linuxbsd
-4. Integrate the built module with your Godot 4.3 source code.
-
+   cd /path/to/godot-source-code
+   scons -j8 verbose=yes disable_exceptions=false SHOWBUILD=1 custom_modules=/path/to/Godot-4-ROS2-integration/src/godot_custom_modules platform=linuxbsd
+4. Build Jolt Physics Engine add-on for Godot 4 ([details are here](https://github.com/godot-jolt/godot-jolt)):
+   ```bash
+   git clone https://github.com/godot-jolt/godot-jolt.git
+   cd godot-jolt
+   cmake --preset linux-gcc-x64
+   cmake --build --preset linux-gcc-x64-distribution
+   cmake --build --preset linux-gcc-x64-editor-distribution
+   cmake --install build/linux-gcc-x64 --config Distribution --prefix /path/to/Godot-4-ROS2-integration/src/Godot_4WS4WD_simulation_game
+   cmake --install build/linux-gcc-x64 --config EditorDistribution --prefix /path/to/Godot-4-ROS2-integration/src/Godot_4WS4WD_simulation_game
+   
 ## Usage
 ### Running the Simulation
 1. Open the example project in Godot 4.3.
