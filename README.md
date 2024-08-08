@@ -1,9 +1,10 @@
 # Godot-ROS2 Integration repository
 
 This project aims to fuse the powerful open-source game engine Godot 4 with ROS2 (Robot Operating System) framework. Leveraging Godot's modular C++ source code, this integration fits seamlessly into the ROS2 pipeline, providing a supreme platform for developing and testing robotics algorithms in simulated environments.
-
-<img src="blender-godot4-ROS2.png" width="300" style="float:left; margin-right:10px;">
-
+<div>
+<img src="https://github.com/user-attachments/assets/c11576bc-543c-4d5e-bf7c-55a2f3806530" width="500" style="float:left; margin-right:10px;">
+<img src="https://github.com/user-attachments/assets/6fe776cb-a318-4edd-b259-a32dde763fa9" width="500" style="float:right;">
+</div>
 
 ## This repository contains:
 
@@ -100,3 +101,5 @@ For more details on the Jolt Physics Engine and its integration with Godot, refe
 
 ## License
 This project is licensed under the MIT License.
+
+![blender-godot4-ROS2](https://github.com/user-attachments/assets/4f24f085-0de7-438f-8500-748f73457ac3)
