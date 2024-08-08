@@ -2,6 +2,9 @@
 
 This project aims to fuse the powerful open-source game engine Godot 4 with ROS2 (Robot Operating System) framework. Leveraging Godot's modular C++ source code, this integration fits seamlessly into the ROS2 pipeline, providing a supreme platform for developing and testing robotics algorithms in simulated environments.
 
+<img src="blender-godot4-ROS2.png" width="300" style="float:left; margin-right:10px;">
+
+
 ## This repository contains:
 
 - A ROS2 component developed as a Godot module, built with the Godot 4 source code. Godot uses SCons build system.
