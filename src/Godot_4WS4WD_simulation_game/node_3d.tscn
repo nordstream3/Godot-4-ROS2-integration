@@ -1,0 +1,286 @@
+[gd_scene load_steps=16 format=3 uid="uid://c0586p8j3mtad"]
+
+[ext_resource type="PackedScene" uid="uid://dm8p52x1ybker" path="res://uploads_files_2883707_warehouse6.blend" id="1_58xlm"]
+[ext_resource type="Script" path="res://camera_3d.gd" id="1_tolnh"]
+[ext_resource type="Script" path="res://camera_controller.gd" id="2_84s6x"]
+[ext_resource type="Shader" path="res://node_3d.gdshader" id="3_cd8pd"]
+[ext_resource type="Script" path="res://depth_camera_3d.gd" id="4_vkwfc"]
+[ext_resource type="Script" path="res://vehicle_control_node.gd" id="5_gpu4r"]
+
+[sub_resource type="GDScript" id="GDScript_8ha4j"]
+script/source = "extends Node3D
+
+@onready var mobile_carrier = $\"uploads_files_2883707_warehouse6/Mobile_carrier-rigid\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_navko"]
+friction = 0.2
+
+[sub_resource type="Environment" id="Environment_lu8ns"]
+background_energy_multiplier = 2.0
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ssr_enabled = true
+ssr_max_steps = 60
+ssao_enabled = true
+ssao_radius = 1.95
+ssao_intensity = 4.19
+ssao_power = 1.21838
+ssao_horizon = 0.5
+ssil_enabled = true
+ssil_radius = 0.01
+sdfgi_enabled = true
+sdfgi_energy = 2.0
+glow_enabled = true
+fog_enabled = true
+fog_density = 0.0211
+volumetric_fog_density = 0.1768
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+volumetric_fog_emission = Color(0.219501, 0.219501, 0.219501, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u40om"]
+render_priority = 0
+shader = ExtResource("3_cd8pd")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_i1lrc"]
+viewport_path = NodePath("SubViewport2")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2yd4a"]
+size = Vector3(0.06, 0.06, 0.06)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_21tsk"]
+friction = 0.37
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gcrrm"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.05
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jam0a"]
+radius = 0.05
+
+[node name="Node3D" type="Node3D"]
+script = SubResource("GDScript_8ha4j")
+
+[node name="uploads_files_2883707_warehouse6" parent="." instance=ExtResource("1_58xlm")]
+transform = Transform3D(0.847979, 0, 0, 0, 0.847979, 0, 0, 0, 0.847979, 0, 0, 0)
+
+[node name="Mobile_carrier-rigid" parent="uploads_files_2883707_warehouse6" index="16"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.166373, 0)
+physics_material_override = SubResource("PhysicsMaterial_navko")
+
+[node name="Camera" parent="uploads_files_2883707_warehouse6/Mobile_carrier-rigid" index="0"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.52588e-05, 0)
+
+[node name="Mobile_carrier-rigid" parent="uploads_files_2883707_warehouse6/Mobile_carrier-rigid" index="1"]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+
+[node name="CollisionShape3D" parent="uploads_files_2883707_warehouse6/Mobile_carrier-rigid" index="2"]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="uploads_files_2883707_warehouse6/Mobile_carrier-rigid" index="3"]
+remote_path = NodePath("../../../SubViewport2/Camera_Mount")
+
+[node name="02_ dinding depan" parent="uploads_files_2883707_warehouse6" index="17"]
+transform = Transform3D(8.38371, 0, 0, 0, 3.98845, 0, 0, 0, 15.1603, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lu8ns")
+
+[node name="Camera_Controller" type="Node3D" parent="."]
+top_level = true
+script = ExtResource("2_84s6x")
+
+[node name="Camera3D" type="Camera3D" parent="Camera_Controller"]
+transform = Transform3D(1, 0, 0, 0, 0.950054, 0.312086, 0, -0.312086, 0.950054, 0, 0.958991, 1.54508)
+current = true
+script = ExtResource("1_tolnh")
+
+[node name="Timer" type="Timer" parent="Camera_Controller"]
+
+[node name="SubViewport2" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(1024, 256)
+render_target_update_mode = 4
+
+[node name="Camera_Mount" type="Node3D" parent="SubViewport2"]
+transform = Transform3D(-3.70663e-08, 0, -0.847979, 0, 0.847979, 0, 0.847979, 0, -3.70663e-08, 0, 0.141081, 0)
+top_level = true
+
+[node name="Camera3D2" type="Camera3D" parent="SubViewport2/Camera_Mount"]
+transform = Transform3D(-8.66925e-08, 0, 1.17927, 0, 1.17927, 0, -1.17927, 0, -8.66925e-08, -0.591793, 0.236616, 0.00110594)
+keep_aspect = 0
+current = true
+fov = 90.0
+size = 0.254832
+near = 0.001
+far = 100.0
+script = ExtResource("4_vkwfc")
+
+[node name="Depth_Filter" type="Sprite3D" parent="SubViewport2/Camera_Mount/Camera3D2"]
+transform = Transform3D(0.999999, 0, -2.98023e-08, 0, 0.999999, 0, 2.98023e-08, 0, 0.999999, 1.45519e-09, 0, -0.04905)
+material_override = SubResource("ShaderMaterial_u40om")
+cast_shadow = 0
+ignore_occlusion_culling = true
+pixel_size = 0.0001
+texture = SubResource("ViewportTexture_i1lrc")
+
+[node name="Timer2" type="Timer" parent="SubViewport2/Camera_Mount"]
+
+[node name="VehicleControlNode" type="Node3D" parent="."]
+script = ExtResource("5_gpu4r")
+
+[node name="Swerve" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30626, 0.168194, 0.42025)
+
+[node name="YawLink" type="RigidBody3D" parent="Swerve"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Swerve/YawLink"]
+shape = SubResource("BoxShape3D_2yd4a")
+
+[node name="YawJoint" type="HingeJoint3D" parent="Swerve"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+node_a = NodePath("../../uploads_files_2883707_warehouse6/Mobile_carrier-rigid")
+node_b = NodePath("../YawLink")
+motor/enable = true
+motor/target_velocity = 3.49066
+motor/max_impulse = 1024.0
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Swerve"]
+physics_material_override = SubResource("PhysicsMaterial_21tsk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Swerve/RigidBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_gcrrm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Swerve/RigidBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_jam0a")
+
+[node name="WheelJoint" type="HingeJoint3D" parent="Swerve"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+node_a = NodePath("../YawLink")
+node_b = NodePath("../RigidBody3D")
+motor/enable = true
+motor/target_velocity = 3.49066
+motor/max_impulse = 280.27
+
+[node name="Swerve4" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.306, 0.168, -0.42)
+
+[node name="YawLink" type="RigidBody3D" parent="Swerve4"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Swerve4/YawLink"]
+shape = SubResource("BoxShape3D_2yd4a")
+
+[node name="YawJoint" type="HingeJoint3D" parent="Swerve4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+node_a = NodePath("../../uploads_files_2883707_warehouse6/Mobile_carrier-rigid")
+node_b = NodePath("../YawLink")
+motor/enable = true
+motor/target_velocity = 3.49066
+motor/max_impulse = 1024.0
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Swerve4"]
+physics_material_override = SubResource("PhysicsMaterial_21tsk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Swerve4/RigidBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_gcrrm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Swerve4/RigidBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_jam0a")
+
+[node name="WheelJoint" type="HingeJoint3D" parent="Swerve4"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+node_a = NodePath("../YawLink")
+node_b = NodePath("../RigidBody3D")
+motor/enable = true
+motor/target_velocity = 3.49066
+motor/max_impulse = 280.27
+
+[node name="Swerve3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.306, 0.168, -0.42)
+
+[node name="YawLink" type="RigidBody3D" parent="Swerve3"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Swerve3/YawLink"]
+shape = SubResource("BoxShape3D_2yd4a")
+
+[node name="YawJoint" type="HingeJoint3D" parent="Swerve3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+node_a = NodePath("../../uploads_files_2883707_warehouse6/Mobile_carrier-rigid")
+node_b = NodePath("../YawLink")
+motor/enable = true
+motor/target_velocity = 3.49066
+motor/max_impulse = 1024.0
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Swerve3"]
+physics_material_override = SubResource("PhysicsMaterial_21tsk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Swerve3/RigidBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_gcrrm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Swerve3/RigidBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_jam0a")
+
+[node name="WheelJoint" type="HingeJoint3D" parent="Swerve3"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+node_a = NodePath("../YawLink")
+node_b = NodePath("../RigidBody3D")
+motor/enable = true
+motor/target_velocity = 3.49066
+motor/max_impulse = 280.27
+
+[node name="Swerve2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.306, 0.168, 0.42)
+
+[node name="YawLink" type="RigidBody3D" parent="Swerve2"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Swerve2/YawLink"]
+shape = SubResource("BoxShape3D_2yd4a")
+
+[node name="YawJoint" type="HingeJoint3D" parent="Swerve2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+node_a = NodePath("../../uploads_files_2883707_warehouse6/Mobile_carrier-rigid")
+node_b = NodePath("../YawLink")
+motor/enable = true
+motor/target_velocity = 3.49066
+motor/max_impulse = 1024.0
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Swerve2"]
+physics_material_override = SubResource("PhysicsMaterial_21tsk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Swerve2/RigidBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_gcrrm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Swerve2/RigidBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_jam0a")
+
+[node name="WheelJoint" type="HingeJoint3D" parent="Swerve2"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+node_a = NodePath("../YawLink")
+node_b = NodePath("../RigidBody3D")
+motor/enable = true
+motor/target_velocity = 3.49066
+motor/max_impulse = 280.27
+
+[editable path="uploads_files_2883707_warehouse6"]
