@@ -78,6 +78,12 @@ Find the instructions for building ROS2 Humble from source [here](https://docs.r
    cd ../..
    colcon build --symlink-install
 
+### Download Godot 4.3 source code (or latest)
+
+1. Clone repository to a folder of your choice (more info [here](https://docs.godotengine.org/en/stable/contributing/development/compiling/getting_source.html)):
+   ```bash
+   git clone https://github.com/godotengine/godot.git
+
 ### Clone THIS repository
 
 1. Clone repository:
