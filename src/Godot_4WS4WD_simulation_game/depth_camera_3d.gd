@@ -3,12 +3,12 @@ extends Camera3D
 # initialize ROS viewport node
 var ros_viewport = ViewPort.new()
 
-@onready var my_timer = $"../Timer2"
+@onready var my_timer = $"../Timer"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Spin ros node
-	ros_viewport.create("godot_image_node1", "image1")
+	ros_viewport.create("godot_image_node1", name)
 	ros_viewport.spin_some()
 
 	my_timer.timeout.connect(_on_timer_timeout1)

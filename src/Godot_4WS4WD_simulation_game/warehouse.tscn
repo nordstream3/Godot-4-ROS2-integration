@@ -1,0 +1,130 @@
+[gd_scene load_steps=13 format=3 uid="uid://b117v7efpfiav"]
+
+[ext_resource type="Script" path="res://warehouse.gd" id="1_gjygx"]
+[ext_resource type="PackedScene" uid="uid://co2bkjmrxw2jf" path="res://warehouse.blend" id="1_lyiwn"]
+[ext_resource type="Texture2D" uid="uid://gcgo63ngeap7" path="res://Untitled.002.png" id="2_cjmto"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qy4uf"]
+transparency = 1
+albedo_texture = ExtResource("2_cjmto")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2dghp"]
+transparency = 1
+albedo_color = Color(0.0392157, 0.388235, 0.0509804, 0.537255)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jjbpg"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1t5vr"]
+
+[sub_resource type="Sky" id="Sky_i571k"]
+sky_material = SubResource("PanoramaSkyMaterial_1t5vr")
+
+[sub_resource type="Environment" id="Environment_icktq"]
+background_mode = 2
+sky = SubResource("Sky_i571k")
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.03
+volumetric_fog_temporal_reprojection_enabled = false
+volumetric_fog_temporal_reprojection_amount = 0.95
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_l3dkh"]
+exposure_multiplier = 0.366
+dof_blur_far_distance = 20.0
+dof_blur_far_transition = 10.0
+dof_blur_near_distance = 1.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ujl45"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7nab0"]
+size = Vector3(100, 0.1, 100)
+
+[node name="WarehouseScene" type="Node3D"]
+script = ExtResource("1_gjygx")
+
+[node name="warehouse" parent="." instance=ExtResource("1_lyiwn")]
+
+[node name="zamera_Orientation" parent="warehouse/zamera" index="0"]
+current = true
+
+[node name="Spot_Orientation" parent="warehouse/Spot" index="0"]
+light_cull_mask = 4294967291
+
+[node name="Spot_001_Orientation" parent="warehouse/Spot_001" index="0"]
+light_cull_mask = 4294967291
+
+[node name="Spot_002_Orientation" parent="warehouse/Spot_002" index="0"]
+light_cull_mask = 4294967291
+
+[node name="Spot_003_Orientation" parent="warehouse/Spot_003" index="0"]
+light_cull_mask = 4294967291
+
+[node name="Spot_004_Orientation" parent="warehouse/Spot_004" index="0"]
+light_cull_mask = 4294967291
+
+[node name="Spot_009_Orientation" parent="warehouse/Spot_009" index="0"]
+light_cull_mask = 4294967291
+
+[node name="Spot_008_Orientation" parent="warehouse/Spot_008" index="0"]
+light_cull_mask = 4294967291
+
+[node name="Spot_007_Orientation" parent="warehouse/Spot_007" index="0"]
+light_cull_mask = 4294967291
+
+[node name="Spot_006_Orientation" parent="warehouse/Spot_006" index="0"]
+light_cull_mask = 4294967291
+
+[node name="Spot_005_Orientation" parent="warehouse/Spot_005" index="0"]
+light_cull_mask = 4294967291
+
+[node name="Spot_014_Orientation" parent="warehouse/Spot_014" index="0"]
+light_cull_mask = 4294967291
+
+[node name="Spot_013_Orientation" parent="warehouse/Spot_013" index="0"]
+light_cull_mask = 4294967291
+
+[node name="Spot_012_Orientation" parent="warehouse/Spot_012" index="0"]
+light_cull_mask = 4294967291
+
+[node name="Spot_011_Orientation" parent="warehouse/Spot_011" index="0"]
+light_cull_mask = 4294967291
+
+[node name="Spot_010_Orientation" parent="warehouse/Spot_010" index="0"]
+light_cull_mask = 4294967291
+
+[node name="Plane" parent="warehouse" index="16"]
+transform = Transform3D(0.1, 0, 0, 0, 0.4, 0, 0, 0, 4, 0, 0.0228642, -0.0599999)
+layers = 4
+surface_material_override/0 = SubResource("StandardMaterial3D_qy4uf")
+
+[node name="03_ dinding" parent="warehouse" index="19"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2dghp")
+surface_material_override/2 = SubResource("StandardMaterial3D_jjbpg")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_icktq")
+camera_attributes = SubResource("CameraAttributesPractical_l3dkh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_ujl45")
+
+[node name="CollisionStatic" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, 0)
+top_level = true
+shape = SubResource("BoxShape3D_7nab0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.43264, 0)
+layers = 4
+light_energy = 12.152
+light_bake_mode = 0
+light_cull_mask = 4293918724
+
+[editable path="warehouse"]

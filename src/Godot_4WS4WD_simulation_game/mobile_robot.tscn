@@ -1,0 +1,178 @@
+[gd_scene load_steps=12 format=3 uid="uid://cnkssk680r7su"]
+
+[ext_resource type="PackedScene" uid="uid://b630n4ha5mv7d" path="res://mobile_robot.blend" id="1_62asv"]
+[ext_resource type="Shader" path="res://depth_filter.gdshader" id="2_apia5"]
+[ext_resource type="Script" path="res://depth_camera_3d.gd" id="3_6cnc1"]
+[ext_resource type="Script" path="res://keyboard_steering.gd" id="4_1yi13"]
+[ext_resource type="Script" path="res://ros_steering.gd" id="5_0ockk"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cw50l"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4eefa"]
+top_radius = 0.045
+bottom_radius = 0.045
+height = 0.045
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o11b1"]
+size = Vector3(0.65, 0.14, 0.95)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w37h6"]
+render_priority = 0
+shader = ExtResource("2_apia5")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6fnut"]
+viewport_path = NodePath("DepthViewport")
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_0ok42"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="mobile_robot" parent="." instance=ExtResource("1_62asv")]
+
+[node name="4ws4wd_robot" parent="mobile_robot" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="VehicleBody3D" type="VehicleBody3D" parent="."]
+mass = 100.0
+physics_material_override = SubResource("PhysicsMaterial_cw50l")
+
+[node name="VehicleWheel_1" type="VehicleWheel3D" parent="VehicleBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29, 0, -0.42)
+use_as_steering = true
+wheel_radius = 0.045
+wheel_rest_length = 0.05
+suspension_travel = 0.05
+suspension_stiffness = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleBody3D/VehicleWheel_1"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_4eefa")
+
+[node name="VehicleWheel_2" type="VehicleWheel3D" parent="VehicleBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29, 0, -0.42)
+use_as_steering = true
+wheel_radius = 0.045
+wheel_rest_length = 0.05
+suspension_travel = 0.05
+suspension_stiffness = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleBody3D/VehicleWheel_2"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_4eefa")
+
+[node name="VehicleWheel_3" type="VehicleWheel3D" parent="VehicleBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29, 0, 0.42)
+use_as_steering = true
+wheel_radius = 0.045
+wheel_rest_length = 0.05
+suspension_travel = 0.05
+suspension_stiffness = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleBody3D/VehicleWheel_3"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_4eefa")
+
+[node name="VehicleWheel_4" type="VehicleWheel3D" parent="VehicleBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29, 0, 0.42)
+use_as_steering = true
+wheel_radius = 0.045
+wheel_rest_length = 0.05
+suspension_travel = 0.05
+suspension_stiffness = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleBody3D/VehicleWheel_4"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_4eefa")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="VehicleBody3D"]
+remote_path = NodePath("../../mobile_robot/4ws4wd_robot")
+
+[node name="RemoteTransform3D2" type="RemoteTransform3D" parent="VehicleBody3D"]
+remote_path = NodePath("../../DepthViewport/Camera_Mount")
+
+[node name="RemoteTransform3D3" type="RemoteTransform3D" parent="VehicleBody3D"]
+remote_path = NodePath("../../Camera_Controller")
+
+[node name="RemoteTransform3D4" type="RemoteTransform3D" parent="VehicleBody3D"]
+remote_path = NodePath("../../MagneticViewport/Camera_Mount")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VehicleBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0880585, 0)
+shape = SubResource("BoxShape3D_o11b1")
+
+[node name="DepthViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(1024, 256)
+render_target_update_mode = 4
+
+[node name="Camera_Mount" type="Node3D" parent="DepthViewport"]
+top_level = true
+
+[node name="DepthCam" type="Camera3D" parent="DepthViewport/Camera_Mount"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0575075, -0.440663)
+keep_aspect = 0
+cull_mask = 33
+current = true
+fov = 90.0
+size = 0.254832
+near = 0.001
+far = 100.0
+script = ExtResource("3_6cnc1")
+
+[node name="Depth_Filter" type="Sprite3D" parent="DepthViewport/Camera_Mount/DepthCam"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 1.45519e-09, 0, -0.04905)
+layers = 32
+material_override = SubResource("ShaderMaterial_w37h6")
+cast_shadow = 0
+ignore_occlusion_culling = true
+gi_mode = 0
+pixel_size = 0.0001
+transparent = false
+texture = SubResource("ViewportTexture_6fnut")
+
+[node name="Timer" type="Timer" parent="DepthViewport/Camera_Mount"]
+
+[node name="MagneticViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(512, 128)
+render_target_update_mode = 4
+
+[node name="Camera_Mount" type="Node3D" parent="MagneticViewport"]
+top_level = true
+
+[node name="MagCam" type="Camera3D" parent="MagneticViewport/Camera_Mount"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0595207, -0.347759)
+keep_aspect = 0
+cull_mask = 4
+projection = 1
+current = true
+fov = 90.0
+size = 0.254832
+near = 0.001
+far = 100.0
+script = ExtResource("3_6cnc1")
+
+[node name="Timer" type="Timer" parent="MagneticViewport/Camera_Mount"]
+
+[node name="Camera_Controller" type="Node3D" parent="."]
+top_level = true
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Camera_Controller"]
+transform = Transform3D(1, 0, 0, 0, 0.911991, 0.41021, 0, -0.41021, 0.911991, 0, 0.113213, 0.0274255)
+shape = SubResource("SeparationRayShape3D_0ok42")
+
+[node name="Camera3D" type="Camera3D" parent="Camera_Controller/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 0.994386, 0.105813, 0, -0.105813, 0.994386, 0, 0, 0)
+current = true
+
+[node name="Timer" type="Timer" parent="Camera_Controller/SpringArm3D"]
+
+[node name="KeyboardSteering" type="Node3D" parent="."]
+script = ExtResource("4_1yi13")
+
+[node name="RosSteering" type="Node3D" parent="."]
+script = ExtResource("5_0ockk")
+
+[node name="Timer" type="Timer" parent="RosSteering"]
+
+[editable path="mobile_robot"]
