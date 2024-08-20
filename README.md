@@ -2,16 +2,16 @@
 
 This project aims to fuse the powerful open-source game engine Godot 4 with ROS2 (Robot Operating System) framework. Leveraging Godot's modular C++ source code, this integration fits seamlessly into the ROS2 pipeline, providing a supreme platform for developing and testing robotics algorithms in simulated environments.
 <div>
-<img src="https://github.com/user-attachments/assets/3b0cdcac-ce2d-477f-a930-5dbc7c160f34" width="500" style="float:left; margin-right:10px;">
-<img src="https://github.com/user-attachments/assets/fac3542f-1ee2-45be-9fd8-342c4ef00e5b" width="500" style="float:right;">
+<img src="https://github.com/user-attachments/assets/3b0cdcac-ce2d-477f-a930-5dbc7c160f34" width="350" style="float:left; margin-right:10px;">
+<img src="https://github.com/user-attachments/assets/fac3542f-1ee2-45be-9fd8-342c4ef00e5b" width="350" style="float:right;">
 </div>
 <div>
-<img src="https://github.com/user-attachments/assets/8f451387-2146-4821-b630-568bd15e4ee7" width="500" style="float:left; margin-right:10px;">
-<img src="https://github.com/user-attachments/assets/4ba749a2-1ae8-41bc-afa3-0cc5465fc373" width="500" style="float:right;">
+<img src="https://github.com/user-attachments/assets/8f451387-2146-4821-b630-568bd15e4ee7" width="350" style="float:left; margin-right:10px;">
+<img src="https://github.com/user-attachments/assets/4ba749a2-1ae8-41bc-afa3-0cc5465fc373" width="350" style="float:right;">
 </div>
 <div>
-<img src="https://github.com/user-attachments/assets/113f7148-e5ad-4ac9-be6f-f37ea868ea11" width="500" style="float:left; margin-right:10px;">
-<img src="https://github.com/user-attachments/assets/f65684d4-849c-4168-b79b-bdd8645cb9be" width="500" style="float:right;">
+<img src="https://github.com/user-attachments/assets/113f7148-e5ad-4ac9-be6f-f37ea868ea11" width="350" style="float:left; margin-right:10px;">
+<img src="https://github.com/user-attachments/assets/f65684d4-849c-4168-b79b-bdd8645cb9be" width="350" style="float:right;">
 </div>
 
 ## This repository contains:
