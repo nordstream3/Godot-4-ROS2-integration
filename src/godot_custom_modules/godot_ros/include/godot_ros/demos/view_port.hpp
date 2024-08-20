@@ -38,13 +38,21 @@ public:
   ViewPort() {
     if (!ViewPort::initialized) {
       ViewPort::initialized = true;
-      rclcpp::init(0, nullptr);
 
-      // Set up logging
-      rcutils_logging_initialize();
+      bool success = true;
+      try {
+	rclcpp::init(0, nullptr);
+      } catch (...) {
+	success = false;
+      }
+      
+      if (success) {
+	// Set up logging
+	rcutils_logging_initialize();
 
-      // Optional: Set the global severity level
-      rcutils_logging_set_default_logger_level(RCUTILS_LOG_SEVERITY_DEBUG);
+	// Optional: Set the global severity level
+	rcutils_logging_set_default_logger_level(RCUTILS_LOG_SEVERITY_DEBUG);
+      }
     }
     //m_pNode = memnew(rclcpp::Node("godot_image_node"));
     //m_node = std::shared_ptr<rclcpp::Node>(m_pNode);
