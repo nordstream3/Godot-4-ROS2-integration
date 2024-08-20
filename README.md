@@ -27,7 +27,7 @@ The example simulation features a **4WS4WD** (4-Wheel Steering, 4-Wheel Driving)
 
 Godot 4.3 is the latest iteration of the Godot game engine, known for its open-source nature, modular architecture, and robust community support. Compared to other popular game engines like Unity and Unreal, Godot stands out due to its lightweight footprint, ease of use, and complete access to its source code. These features make it particularly suitable for integration with other open-source projects, such as ROS2.
 
-Godot's architecture is highly modular, allowing developers to extend or modify its functionality through modules. In the context of ROS2, this modularity enables tight integration with ROS2's middleware, making it possible to run complex simulations and control systems entirely within the Godot environment.
+Godot's architecture is highly modular, allowing developers to extend or modify its functionality through modules. [Custom Godot modules in C++](https://docs.godotengine.org/en/stable/contributing/development/core_and_modules/custom_modules_in_cpp.html). In the context of ROS2, this modularity enables tight integration with ROS2's middleware, making it possible to run complex simulations and control systems entirely within the Godot environment.
 
 ### Create a complete Robotics Application with controls and sensors in a Simulated Environment using Godot 4
 
@@ -42,7 +42,7 @@ For more information on the 4WS4WD Swerve Drive configuration, consider reviewin
 - [Swerve Drive Visualization](https://github.com/xiaoxiae/SwerveDriveVisualisation)
 
 ## The Blender-Godot-ROS2 pipeline
-What we want for Robotics Simulation is an Open Source true reliable **Game Engine** closely integrated with Blender and ROS2. Use blender for what it's good at - Geometry and Scene Setup. Godot by far has the best integration with Blender.
+What we want for Robotics Simulation is an Open Source true reliable **Game Engine** closely integrated with Blender and ROS2. Use blender for what it's good at - Geometry and Scene Setup. Godot by far has the best integration with Blender compared to other game engines.
 
 ### Jolt Physics Engine
 
