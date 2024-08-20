@@ -25,7 +25,7 @@
 
 #include "core/object/class_db.h"
 //#include "godot_ros/demos/talker.hpp"
-//#include "godot_ros/demos/cmd_listener.hpp"
+#include "godot_ros/demos/cmd_listener.hpp"
 #include "godot_ros/demos/view_port.hpp"
 //#include "godot_ros/demos/raycast_publisher.hpp"
 
@@ -34,6 +34,7 @@ void initialize_godot_ros_module(ModuleInitializationLevel p_level) {
             return;
     }
     ClassDB::register_class<ViewPort>();
+    ClassDB::register_class<CmdListener>();
 }
 
 void uninitialize_godot_ros_module(ModuleInitializationLevel p_level) {

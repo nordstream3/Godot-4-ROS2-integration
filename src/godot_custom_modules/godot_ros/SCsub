@@ -8,10 +8,9 @@ from pathlib import Path
 Import('env')
 
 ros_distro = "humble"
-cpp_version = "-std=c++17"
-
-#ros_dir = "/opt/ros/" + ros_distro
 ros_dir = "/home/jens/ros2_humble/install"
+
+cpp_version = "-std=c++17"
 
 #def getSubDirs(base_path: str, with_base_path: bool = True):
 #    if not base_path.endswith("/"):
