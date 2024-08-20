@@ -135,5 +135,5 @@ Find the instructions for building ROS2 Humble from source [here](https://docs.r
    ros2 run rqt_image_view rqt_image_view
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the GNU General Public License v3.0.
 
