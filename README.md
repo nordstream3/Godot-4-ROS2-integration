@@ -44,8 +44,6 @@ For more information on the 4WS4WD Swerve Drive configuration, consider reviewin
 ## The Blender-Godot-ROS2 pipeline
 What we want for Robotics Simulation is an Open Source true reliable **Game Engine** closely integrated with Blender and ROS2. Use blender for what it's good at - Geometry and Scene Setup. Godot by far has the best integration with Blender.
 
-<img src="https://github.com/user-attachments/assets/4f24f085-0de7-438f-8500-748f73457ac3" width="800" style="float:left; margin-right:10px;">
-
 ### Jolt Physics Engine
 
 While Godot 4 comes with a built-in physics engine, it has been noted that this default engine may not meet the high precision and performance requirements needed for advanced robotics simulations. To address this, this project uses the **Jolt Physics Engine**, a native extension for Godot that provides a more robust and accurate physics simulation environment.
