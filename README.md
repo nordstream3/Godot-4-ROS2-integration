@@ -47,7 +47,7 @@ What we want for Robotics Simulation is an Open Source true reliable **Game Engi
 
 ### Jolt Physics Engine
 
-While Godot 4 comes with a built-in physics engine, which may not meet the high precision and performance requirements needed for advanced robotics simulations. To address this, this project uses the **Jolt Physics Engine**, a native extension for Godot that provides a more robust and accurate physics simulation environment.
+Godot 4.x comes with a built-in physics engine, which does not meet the high precision and performance requirements needed for advanced robotics simulations. To address this, this project uses the **Jolt Physics Engine**, a native extension for Godot that provides a more robust and accurate physics simulation environment.
 
 Jolt is known for its high performance and stability, making it well-suited for simulations involving complex physical interactions. For more details on the Jolt Physics Engine and its integration with Godot, refer to the following resources:
 
