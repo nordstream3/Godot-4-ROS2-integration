@@ -29,13 +29,13 @@ class MinimalPublisher(Node):
             msg = String()
             msg.data = "end"
             self.publisher_.publish(msg)
-            self.get_logger().info('Publishing: "%s"' % msg.data)
+            #self.get_logger().info('Publishing: "%s"' % msg.data)
         elif publish or publishAction:
             publish = True
             msg = String()
             msg.data = f"Keys: {[str(k) for k in pressed_keys]}, Mouse: {mouse_pos}"
             self.publisher_.publish(msg)
-            self.get_logger().info('Publishing: "%s"' % msg.data)
+            #self.get_logger().info('Publishing: "%s"' % msg.data)
         publishAction = False
 
 
