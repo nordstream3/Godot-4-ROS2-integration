@@ -1,0 +1,62 @@
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://cfajyqbgxd03u"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ebv1c"]
+output_port_for_preview = 0
+expanded_output_ports = [0]
+source = 4
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_0vjku"]
+input_name = "screen_uv"
+
+[sub_resource type="VisualShaderNodeLinearSceneDepth" id="VisualShaderNodeLinearSceneDepth_gty2p"]
+
+[sub_resource type="VisualShaderNodeWorldPositionFromDepth" id="VisualShaderNodeWorldPositionFromDepth_mjw1d"]
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded;
+
+uniform sampler2D depth_tex_frg_2 : hint_depth_texture;
+uniform sampler2D depth_tex_frg_5 : hint_depth_texture, repeat_disable, filter_nearest;
+
+
+
+void fragment() {
+// Input:3
+	vec2 n_out3p0 = SCREEN_UV;
+
+
+	vec4 n_out2p0;
+// Texture2D:2
+	{
+		float _depth = texture(depth_tex_frg_2, n_out3p0).r;
+		n_out2p0 = vec4(_depth, _depth, _depth, 1.0);
+	}
+
+
+	vec3 n_out5p0;
+// WorldPositionFromDepth:5
+	{
+		float __log_depth = textureLod(depth_tex_frg_5, vec2(n_out2p0.xy), 0.0).x;
+	vec4 __depth_view = INV_PROJECTION_MATRIX * vec4(vec2(n_out2p0.xy) * 2.0 - 1.0, __log_depth, 1.0);
+		__depth_view.xyz /= __depth_view.w;
+		n_out5p0 = (INV_VIEW_MATRIX * __depth_view).xyz;
+	}
+
+
+// Output:0
+	ALBEDO = n_out5p0;
+
+
+}
+"
+flags/unshaded = true
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_ebv1c")
+nodes/fragment/2/position = Vector2(-260, 180)
+nodes/fragment/3/node = SubResource("VisualShaderNodeInput_0vjku")
+nodes/fragment/3/position = Vector2(-580, 140)
+nodes/fragment/4/node = SubResource("VisualShaderNodeLinearSceneDepth_gty2p")
+nodes/fragment/4/position = Vector2(-620, 300)
+nodes/fragment/5/node = SubResource("VisualShaderNodeWorldPositionFromDepth_mjw1d")
+nodes/fragment/5/position = Vector2(20, 220)
+nodes/fragment/connections = PackedInt32Array(3, 0, 2, 0, 5, 0, 0, 0, 2, 0, 5, 0)

@@ -12,8 +12,15 @@ config_version=5
 
 config/name="4WS4WD"
 run/main_scene="res://warehouse.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="res://godot4.png"
+boot_splash/fullsize=false
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/mode=2
 
 [input]
 
@@ -40,4 +47,10 @@ move_right={
 
 [physics]
 
+common/physics_ticks_per_second=100
 3d/physics_engine="JoltPhysics3D"
+common/physics_interpolation=true
+
+[rendering]
+
+anti_aliasing/quality/msaa_3d=3

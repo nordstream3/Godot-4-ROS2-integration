@@ -1,16 +1,16 @@
 shader_type spatial;
 render_mode unshaded;
 //render_mode cull_front; // Cull front-faces. Cull back-faces.
-
+//uniform sampler2D noise_tex;
 
 /*void vertex() {
 	// Called for every vertex the material is visible on.
 }*/
 
-varying mat4 CAMERA;
+//varying mat4 CAMERA;
 
 void vertex() {
-  CAMERA = INV_VIEW_MATRIX;
+  //CAMERA = INV_VIEW_MATRIX;
 }
 
 uniform sampler2D depth_texture : source_color, hint_depth_texture;
@@ -27,7 +27,7 @@ uniform sampler2D depth_texture : source_color, hint_depth_texture;
 }*/
 
 void fragment() {
-	float depth = texture(depth_texture, SCREEN_UV).x;
+	float depth = texture(depth_texture, SCREEN_UV).r;
 	vec3 ndc = vec3(SCREEN_UV * 2.0 - 1.0, depth);
 	//vec4 view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
 	//view.xyz /= view.w;

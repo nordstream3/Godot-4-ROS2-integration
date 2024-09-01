@@ -1,8 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://b117v7efpfiav"]
+[gd_scene load_steps=19 format=3 uid="uid://b117v7efpfiav"]
 
 [ext_resource type="Script" path="res://warehouse.gd" id="1_gjygx"]
-[ext_resource type="PackedScene" uid="uid://co2bkjmrxw2jf" path="res://warehouse.blend" id="1_lyiwn"]
-[ext_resource type="Texture2D" uid="uid://gcgo63ngeap7" path="res://Untitled.002.png" id="2_cjmto"]
+[ext_resource type="PackedScene" uid="uid://cqbovump313kt" path="res://warehouse.blend" id="1_lyiwn"]
+[ext_resource type="Texture2D" uid="uid://cdk3v31vlkxxd" path="res://Untitled.002.png" id="2_cjmto"]
+[ext_resource type="Shader" uid="uid://cv8v5j6itildp" path="res://world.tres" id="4_ydq7v"]
+[ext_resource type="Texture2D" uid="uid://px2vao76ubqc" path="res://godot4.png" id="5_kk1od"]
+[ext_resource type="Script" path="res://parcels.gd" id="6_1ljgf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qy4uf"]
 transparency = 1
@@ -18,27 +21,51 @@ albedo_color = Color(0.0392157, 0.388235, 0.0509804, 0.537255)
 transparency = 1
 albedo_color = Color(1, 1, 1, 0)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l7gpi"]
+render_priority = 0
+shader = ExtResource("4_ydq7v")
+shader_parameter/ColorParameter = Color(0.156863, 0.156863, 0.156863, 1)
+shader_parameter/FloatParameter = 300.0
+shader_parameter/FloatParameter2 = 400.0
+shader_parameter/FloatParameter3 = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_erwtf"]
+resource_name = "Material.002"
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("5_kk1od")
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8hriy"]
+resource_name = "Material.003"
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("5_kk1od")
+roughness = 0.5
+
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1t5vr"]
 
 [sub_resource type="Sky" id="Sky_i571k"]
 sky_material = SubResource("PanoramaSkyMaterial_1t5vr")
 
 [sub_resource type="Environment" id="Environment_icktq"]
-background_mode = 2
+background_energy_multiplier = 5.12
 sky = SubResource("Sky_i571k")
 ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_min_cell_size = 0.0292969
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.03
-volumetric_fog_temporal_reprojection_enabled = false
+volumetric_fog_density = 0.02
 volumetric_fog_temporal_reprojection_amount = 0.95
+adjustment_enabled = true
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_l3dkh"]
 exposure_multiplier = 0.366
 dof_blur_far_distance = 20.0
-dof_blur_far_transition = 10.0
+dof_blur_far_transition = 15.0
 dof_blur_near_distance = 1.0
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ujl45"]
@@ -100,13 +127,25 @@ light_cull_mask = 4294967291
 light_cull_mask = 4294967291
 
 [node name="Plane" parent="warehouse" index="16"]
-transform = Transform3D(0.1, 0, 0, 0, 0.4, 0, 0, 0, 4, 0, 0.0228642, -0.0599999)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0228642, -0.0599999)
 layers = 4
 surface_material_override/0 = SubResource("StandardMaterial3D_qy4uf")
 
 [node name="03_ dinding" parent="warehouse" index="19"]
 surface_material_override/0 = SubResource("StandardMaterial3D_2dghp")
 surface_material_override/2 = SubResource("StandardMaterial3D_jjbpg")
+
+[node name="06_ lantai" parent="warehouse" index="21"]
+surface_material_override/0 = SubResource("ShaderMaterial_l7gpi")
+
+[node name="mashed_bag_white" parent="warehouse" index="37"]
+visible = false
+
+[node name="Plane_001" parent="warehouse" index="40"]
+surface_material_override/0 = SubResource("StandardMaterial3D_erwtf")
+
+[node name="Plane_002" parent="warehouse" index="41"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8hriy")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_icktq")
@@ -126,5 +165,8 @@ layers = 4
 light_energy = 12.152
 light_bake_mode = 0
 light_cull_mask = 4293918724
+
+[node name="Parcels" type="Node3D" parent="."]
+script = ExtResource("6_1ljgf")
 
 [editable path="warehouse"]

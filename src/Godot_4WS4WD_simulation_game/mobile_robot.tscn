@@ -1,29 +1,52 @@
-[gd_scene load_steps=12 format=3 uid="uid://cnkssk680r7su"]
+[gd_scene load_steps=18 format=3 uid="uid://cnkssk680r7su"]
 
-[ext_resource type="PackedScene" uid="uid://b630n4ha5mv7d" path="res://mobile_robot.blend" id="1_62asv"]
-[ext_resource type="Shader" path="res://depth_filter.gdshader" id="2_apia5"]
+[ext_resource type="PackedScene" uid="uid://dtt2j26jvdtyb" path="res://mobile_robot.blend" id="1_62asv"]
+[ext_resource type="Script" path="res://vehicle.gd" id="2_po460"]
+[ext_resource type="Script" path="res://wheel.gd" id="3_0jfyj"]
 [ext_resource type="Script" path="res://depth_camera_3d.gd" id="3_6cnc1"]
 [ext_resource type="Script" path="res://keyboard_steering.gd" id="4_1yi13"]
+[ext_resource type="Shader" uid="uid://b1k0vkgkryf0h" path="res://tire.tres" id="4_dxsks"]
 [ext_resource type="Script" path="res://ros_steering.gd" id="5_0ockk"]
+[ext_resource type="Shader" path="res://depth_filter.gdshader" id="6_cylxx"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cw50l"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bg526"]
+render_priority = 0
+shader = ExtResource("4_dxsks")
+shader_parameter/ColorParameter = Color(0.051971, 0.051971, 0.051971, 1)
+shader_parameter/wheel_radius = 0.045
+shader_parameter/ribs = 8.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_4eefa"]
+material = SubResource("ShaderMaterial_bg526")
 top_radius = 0.045
 bottom_radius = 0.045
 height = 0.045
+rings = 1
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6822r"]
+top_radius = 0.042
+bottom_radius = 0.042
+height = 0.05
+rings = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o11b1"]
-size = Vector3(0.65, 0.14, 0.95)
+size = Vector3(0.615234, 0.0410156, 0.894531)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w37h6"]
 render_priority = 0
-shader = ExtResource("2_apia5")
+shader = ExtResource("6_cylxx")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_6fnut"]
 viewport_path = NodePath("DepthViewport")
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_0ok42"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wibaw"]
+size = Vector3(7.59985, 0.0800781, 5.00952)
+
+[sub_resource type="BoxMesh" id="BoxMesh_32hwg"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -32,73 +55,88 @@ viewport_path = NodePath("DepthViewport")
 [node name="4ws4wd_robot" parent="mobile_robot" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="VehicleBody3D" type="VehicleBody3D" parent="."]
-mass = 100.0
-physics_material_override = SubResource("PhysicsMaterial_cw50l")
-
-[node name="VehicleWheel_1" type="VehicleWheel3D" parent="VehicleBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29, 0, -0.42)
-use_as_steering = true
+[node name="Vehicle" type="RigidBody3D" parent="."]
+mass = 20.0
+script = ExtResource("2_po460")
+suspension_rest_dist = 0.11
+spring_strength = 800.0
+spring_damper = 300.0
 wheel_radius = 0.045
-wheel_rest_length = 0.05
-suspension_travel = 0.05
-suspension_stiffness = 10.0
+lateral_tire_static_friction = 80.0
+lateral_tire_dynamic_friction = 3.0
+lateral_transition_velocity = 12.0
+p = 10.0
+i = 0.5
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleBody3D/VehicleWheel_1"]
+[node name="Wheels" type="Node3D" parent="Vehicle"]
+
+[node name="FL_Wheel" type="RayCast3D" parent="Vehicle/Wheels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29, -0.03, -0.42)
+script = ExtResource("3_0jfyj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Vehicle/Wheels/FL_Wheel"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_4eefa")
+skeleton = NodePath("")
 
-[node name="VehicleWheel_2" type="VehicleWheel3D" parent="VehicleBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29, 0, -0.42)
-use_as_steering = true
-wheel_radius = 0.045
-wheel_rest_length = 0.05
-suspension_travel = 0.05
-suspension_stiffness = 10.0
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Vehicle/Wheels/FL_Wheel"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_6822r")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleBody3D/VehicleWheel_2"]
+[node name="FR_Wheel" type="RayCast3D" parent="Vehicle/Wheels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29, -0.03, -0.42)
+script = ExtResource("3_0jfyj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Vehicle/Wheels/FR_Wheel"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_4eefa")
+skeleton = NodePath("")
 
-[node name="VehicleWheel_3" type="VehicleWheel3D" parent="VehicleBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29, 0, 0.42)
-use_as_steering = true
-wheel_radius = 0.045
-wheel_rest_length = 0.05
-suspension_travel = 0.05
-suspension_stiffness = 10.0
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Vehicle/Wheels/FR_Wheel"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_6822r")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleBody3D/VehicleWheel_3"]
+[node name="RL_Wheel" type="RayCast3D" parent="Vehicle/Wheels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29, -0.03, 0.42)
+script = ExtResource("3_0jfyj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Vehicle/Wheels/RL_Wheel"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_4eefa")
+skeleton = NodePath("")
 
-[node name="VehicleWheel_4" type="VehicleWheel3D" parent="VehicleBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29, 0, 0.42)
-use_as_steering = true
-wheel_radius = 0.045
-wheel_rest_length = 0.05
-suspension_travel = 0.05
-suspension_stiffness = 10.0
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Vehicle/Wheels/RL_Wheel"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_6822r")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleBody3D/VehicleWheel_4"]
+[node name="RR_Wheel" type="RayCast3D" parent="Vehicle/Wheels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29, -0.03, 0.42)
+script = ExtResource("3_0jfyj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Vehicle/Wheels/RR_Wheel"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_4eefa")
+skeleton = NodePath("")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="VehicleBody3D"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Vehicle/Wheels/RR_Wheel"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_6822r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Vehicle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0283483, 0)
+shape = SubResource("BoxShape3D_o11b1")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Vehicle"]
 remote_path = NodePath("../../mobile_robot/4ws4wd_robot")
 
-[node name="RemoteTransform3D2" type="RemoteTransform3D" parent="VehicleBody3D"]
+[node name="RemoteTransform3D2" type="RemoteTransform3D" parent="Vehicle"]
 remote_path = NodePath("../../DepthViewport/Camera_Mount")
 
-[node name="RemoteTransform3D3" type="RemoteTransform3D" parent="VehicleBody3D"]
+[node name="RemoteTransform3D3" type="RemoteTransform3D" parent="Vehicle"]
 remote_path = NodePath("../../Camera_Controller")
 
-[node name="RemoteTransform3D4" type="RemoteTransform3D" parent="VehicleBody3D"]
+[node name="RemoteTransform3D4" type="RemoteTransform3D" parent="Vehicle"]
 remote_path = NodePath("../../MagneticViewport/Camera_Mount")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="VehicleBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0880585, 0)
-shape = SubResource("BoxShape3D_o11b1")
 
 [node name="DepthViewport" type="SubViewport" parent="."]
 handle_input_locally = false
@@ -160,9 +198,10 @@ top_level = true
 [node name="SpringArm3D" type="SpringArm3D" parent="Camera_Controller"]
 transform = Transform3D(1, 0, 0, 0, 0.911991, 0.41021, 0, -0.41021, 0.911991, 0, 0.113213, 0.0274255)
 shape = SubResource("SeparationRayShape3D_0ok42")
+spring_length = 1.3
 
 [node name="Camera3D" type="Camera3D" parent="Camera_Controller/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 0.994386, 0.105813, 0, -0.105813, 0.994386, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.974319, -0.225172, 0, 0.225172, 0.974319, 0, 0, 0)
 current = true
 
 [node name="Timer" type="Timer" parent="Camera_Controller/SpringArm3D"]
@@ -171,8 +210,26 @@ current = true
 script = ExtResource("4_1yi13")
 
 [node name="RosSteering" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0186872, 0)
 script = ExtResource("5_0ockk")
+SPEED_BUTTON_SENSITIVITY = 0.02
+swerve = true
+front_wheel_steering = false
 
 [node name="Timer" type="Timer" parent="RosSteering"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.533226, 0)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_wibaw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(10, 0, 0, 0, 0.01, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_32hwg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.00197224, 0.999998, 0, -0.999998, -0.00197224, 0, 2.66227, 0)
 
 [editable path="mobile_robot"]
