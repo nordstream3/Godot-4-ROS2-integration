@@ -1,6 +1,7 @@
 # Godot-ROS2-Blender Integration repository
+**Why** use a poor tool like GAZEBO for ROS2 robotics simulation, when there is already a Large-Community Open Source Game Engine like **GODOT 4.x**, which can be used for exactly this purpose?
 
-This project aims to fuse the powerful open-source game engine Godot 4 with ROS2 (Robot Operating System) framework. Leveraging Godot's modular C++ source code, this integration fits seamlessly into the ROS2 pipeline, providing a supreme platform for developing and testing robotics algorithms in simulated environments.
+This project aims to fuse the powerful open-source game engine Godot 4 with ROS2 (Robot Operating System). Godots modular source code fits seamlessly into the ROS2 pipeline, providing a supreme platform for developing and testing robotics algorithms in simulated environments.
 <div>
 <img src="https://github.com/user-attachments/assets/3b0cdcac-ce2d-477f-a930-5dbc7c160f34" width="350" style="float:left; margin-right:10px;">
 <img src="https://github.com/user-attachments/assets/fac3542f-1ee2-45be-9fd8-342c4ef00e5b" width="350" style="float:right;">
