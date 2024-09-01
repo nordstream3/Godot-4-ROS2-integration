@@ -119,7 +119,9 @@ Find the instructions for building ROS2 Humble from source [here](https://docs.r
    cmake --build --preset linux-gcc-x64-editor-distribution
    cmake --install build/linux-gcc-x64 --config Distribution --prefix /path/to/Godot-4-ROS2-integration/src/Godot_4WS4WD_simulation_game
    cmake --install build/linux-gcc-x64 --config EditorDistribution --prefix /path/to/Godot-4-ROS2-integration/src/Godot_4WS4WD_simulation_game
-   
+
+Jolt Physics is found in the "addons/godot-jolt" directory. Edit "godot-jolt.gdextension" and set  "  **compatibility_maximum = "4.4"**  ".
+
 ## Usage
 ### Running ROS2 integrated 4WS4WD Mobile Robot Simulation (Game)
 1. Source ROS2:
