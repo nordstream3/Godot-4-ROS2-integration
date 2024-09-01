@@ -17,15 +17,15 @@ This project aims to fuse the powerful open-source game engine Godot 4 with ROS2
 ## This repository contains:
 
 - A C++ ROS2 component build and linked with the C++ Godot 4 source code.
-- An example simulation of a mobile robot, created as a Godot 4.3 game.
+- An example simulation of a mobile robot, created as a Godot 4.4 game.
 
 The example simulation features a **4WS4WD** (4-Wheel Steering, 4-Wheel Driving) setup, where each wheel is configured as a **Swerve Drive**. The robot can be controlled externally through its ROS2 interface. Similarly, it includes a simulated Depth Camera which streams images through its ROS2 node publisher.
 
 ## Background
 
-### Godot 4.3 and ROS2
+### Godot 4.4 and ROS2
 
-Godot 4.3 is the latest iteration of the Godot game engine, known for its open-source nature, modular architecture, and robust community support. Compared to other popular game engines like Unity and Unreal, Godot stands out due to its lightweight footprint, ease of use, and complete access to its source code. These features make it particularly suitable for integration with other open-source projects, such as ROS2.
+Godot 4.4 is the latest iteration of the Godot game engine, known for its open-source nature, modular architecture, and robust community support. Compared to other popular game engines like Unity and Unreal, Godot stands out due to its lightweight footprint, ease of use, and complete access to its source code. These features make it particularly suitable for integration with other open-source projects, such as ROS2.
 
 Godot's architecture is highly modular, allowing developers to extend or modify its functionality through modules. [Custom Godot modules in C++](https://docs.godotengine.org/en/stable/contributing/development/core_and_modules/custom_modules_in_cpp.html). In the context of ROS2, this modularity enables tight integration with ROS2's middleware, making it possible to run complex simulations and control systems entirely within the Godot environment.
 
@@ -64,7 +64,7 @@ Jolt is known for its high performance and stability, making it well-suited for 
 
 ### Prerequisites
 
-- Godot 4.3
+- Godot 4.4
 - ROS2 (Humble Hawksbill or later)
 - Jolt Physics Engine (for Godot)
 - rqt_image_view ROS2 add-on
@@ -84,7 +84,7 @@ Find the instructions for building ROS2 Humble from source [here](https://docs.r
    cd ../..
    colcon build --symlink-install
 
-### Download Godot 4.3 source code (or latest)
+### Download Godot 4.4 source code (at time of writing 4.4 is not yet a release, so just pulling the main branch - latest)
 
 1. Clone repository to a folder of your choice (more info [here](https://docs.godotengine.org/en/stable/contributing/development/compiling/getting_source.html)):
    ```bash
