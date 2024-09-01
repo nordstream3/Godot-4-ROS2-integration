@@ -132,22 +132,18 @@ Jolt Physics is found in the "addons/godot-jolt" directory. Edit "godot-jolt.gde
    ```bash
    ./godot.linuxbsd.editor.x86_64 -v -d
 3. Open Godot_4WS4WD_simulation_game and hit the play button to run the game.
-4. In a new terminal, subscribe to ROS2 image nodes using "rqt_image_view":
-   ```bash
-   source /path/to/ros2_humble/install/local_setup.bash
-   ros2 run rqt_image_view rqt_image_view
 
 ### Running "inputter.py" ROS2 publisher node for Keyboard Control
-1. Source ROS2:
+1. In a new terminal, source ROS2:
    ```bash
    source /path/to/ros2_humble/install/local_setup.bash
 2. In "ros_control" directory run:
    ```bash
    python3 inputter.py
-3. You can now use the mouse and arrow keys for controlling the robot
+3. You can now use the mouse and arrow keys for controlling the robot. If keys stop working, restart the "inputter.py"
 
 ### Running "rqt_image_view" ROS2 subscriber for receiving camera sensor output
-1. Source ROS2:
+1. In yet another terminal, source ROS2:
    ```bash
    source /path/to/ros2_humble/install/local_setup.bash
 2. Run:
