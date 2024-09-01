@@ -46,7 +46,7 @@ What we want for Robotics Simulation is an Open Source true reliable **Game Engi
 
 ### Jolt Physics Engine
 
-While Godot 4 comes with a built-in physics engine, it has been noted that this default engine may not meet the high precision and performance requirements needed for advanced robotics simulations. To address this, this project uses the **Jolt Physics Engine**, a native extension for Godot that provides a more robust and accurate physics simulation environment.
+While Godot 4 comes with a built-in physics engine, which may not meet the high precision and performance requirements needed for advanced robotics simulations. To address this, this project uses the **Jolt Physics Engine**, a native extension for Godot that provides a more robust and accurate physics simulation environment.
 
 Jolt is known for its high performance and stability, making it well-suited for simulations involving complex physical interactions. For more details on the Jolt Physics Engine and its integration with Godot, refer to the following resources:
 
@@ -58,7 +58,7 @@ Jolt is known for its high performance and stability, making it well-suited for 
 - **Godot Module for ROS2**: Seamlessly integrate Godot 4 with ROS2 for advanced robotics simulations.
 - **Mobile Robot Simulation**: A comprehensive example featuring a 4WS4WD mobile robot with 8 DOF.
 - **Jolt Physics Engine**: Utilizes the Jolt Physics Engine for enhanced simulation accuracy and stability.
-- **ROS2 Interface**: Control the robot and receive data from a simulated Depth Camera through ROS2.
+- **ROS2 Interface**: The robot simulated in Godot 4 subscribes to another ROS2 node (inputter.py) for movement commands. Likewise, the Godot 4 simulated robot has its own ROS2 node interface for publishing sensory images from a simulated Depth Camera and another camera pointing downwards for line following.
 
 ## Installation
 
