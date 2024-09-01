@@ -136,6 +136,23 @@ Jolt Physics is found in the "addons/godot-jolt" directory. Edit "godot-jolt.gde
    source /path/to/ros2_humble/install/local_setup.bash
    ros2 run rqt_image_view rqt_image_view
 
+### Running "inputter.py" ROS2 publisher node for Keyboard Control
+1. Source ROS2:
+   ```bash
+   source /path/to/ros2_humble/install/local_setup.bash
+2. In "ros_control" directory run:
+   ```bash
+   python3 inputter.py
+3. You can now use the mouse and arrow keys for controlling the robot
+
+### Running "rqt_image_view" ROS2 subscriber for receiving camera sensor output
+1. Source ROS2:
+   ```bash
+   source /path/to/ros2_humble/install/local_setup.bash
+2. Run:
+   ```bash
+   ros2 run rqt_image_view rqt_image_view
+
 ## License
 This project is licensed under the GNU General Public License v3.0.
 
