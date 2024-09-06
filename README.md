@@ -5,7 +5,7 @@ Watch [teaser on Youtube](https://www.youtube.com/watch?v=UlrBTKUoRRI&t=10s) (fo
 
 This project aims to fuse the powerful open-source game engine Godot 4 with ROS2 (Robot Operating System). Godots modular source code fits seamlessly into the ROS2 pipeline, providing a supreme platform for developing and testing robotics algorithms in simulated environments.
 
-First of all: Big time credits to "flynneva" for being the starting point of this project. I only carried on, because I couldn't get i to compile with latest versions of Godot (4.1 - 4.4).
+First of all: Big time credits to "flynneva" for being the starting point of this project. I took over the torch because I couldn't get it to compile with latest versions of Godot (4.1 - 4.4).
 [flynneva github](https://github.com/flynneva/godot_ros) [flynneva youtube](https://youtu.be/4d_pCm2d-Gs?si=bfxK0tHN8EW_-YoN)
 
 <div>
